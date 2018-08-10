@@ -7,7 +7,6 @@ import (
 
 	"log"
 
-	"fmt"
 )
 
 func CheckError(err error) error{
@@ -38,7 +37,6 @@ func Insert(Foo Food_info,foo Foodlist) (int64){
 	CheckError(err)
 	id, err := res.LastInsertId()
 	CheckError(err)
-	fmt.Println(id)
 	return id
 }
 

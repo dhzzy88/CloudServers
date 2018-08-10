@@ -2,7 +2,7 @@ package main
 import (
 	"net/http"
 	"io"
-	"fmt"
+
 	"github.com/gorilla/mux"
 	"log"
 	"time"
@@ -51,7 +51,6 @@ func GetWeixin(w http.ResponseWriter,r *http.Request){
 
 	Price = list
 	Price.User = "1111"
-	fmt.Println(Price)
 	JSON_STRING,_ :=JsonDecode(Price)
 	io.WriteString(w,JSON_STRING)
 }
@@ -59,22 +58,20 @@ func GetWeixin(w http.ResponseWriter,r *http.Request){
 func PostWeixin(w http.ResponseWriter,r *http.Request){
 	r.ParseForm()
 	s,_ := ioutil.ReadAll(r.Body)
-	fmt.Println(r.Form)
 
-	fmt.Println(string(s))
 	Foo,_:=JsonEncode(string(s))
 	date := time.Now()
 	_,m,d:=date.Date()
 	mstr:=m.String()
 	Foo.Data=mstr+strconv.Itoa(d)
-	fmt.Println(Foo.Data)
+
 
 	for i:=0;i<len(Foo.Food);i++ {
 
 		Insert(Foo.Food[i],Foo)
 
 	}
-	fmt.Println(Foo.Data)
+
 	foo:= Select(Foo)
 	JsonString,_ := JsonDecode(foo)
 

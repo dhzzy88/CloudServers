@@ -2,8 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"log"
-	"fmt"
+
 )
 
 //author is :@leo
@@ -14,7 +13,6 @@ type Food_info struct{
 	Desc string    `json:"Desc"`
 	Price string    `json:"Price"`
 	Number string   `json:"Number"`
-
 
 }
 
@@ -37,10 +35,8 @@ func JsonEncode(s string) (Foodlist,error) {
 	var b =Foodlist{}
 	err := json.Unmarshal([] byte(s), &b)
 	if err!=nil {
-		fmt.Println("err",err)
 		return b,err
 	}
-	log.Println("Json",&b)
 
 	return b,nil
 }
@@ -54,7 +50,7 @@ func JsonDecode(Json Foodlist) (string,error) {
 	if err!=nil{
 		return "",err
 	}
-	fmt.Println(string(v))
+
 	return string(v),nil
 }
 
